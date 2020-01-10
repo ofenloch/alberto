@@ -36,7 +36,7 @@ export class InputComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sheet = new Sheet(5, 8);
+    this.sheet = new Sheet(7, 5);
     this.rowIndices = new Array<number>(this.sheet.NRows);
     for (let i = 0; i < this.sheet.NRows; i++) {
       this.rowIndices[i] = i;
