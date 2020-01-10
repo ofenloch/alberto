@@ -1,3 +1,28 @@
-<p>
-  input works!
-</p>
+<div *ngIf="sheet">
+
+  <h2>The Sheet has {{NRows}} Rows</h2>
+
+
+  <table class="sheet">
+    <tr>
+      <th></th>
+      <th *ngFor="let j of cellIndices">{{j}}</th>
+    </tr>
+    <tr *ngFor="let i of rowIndices">
+      <td>{{i}} </td>
+      <td *ngFor="let j of cellIndices"> {{Cell(i,j).Content}} </td>
+    </tr>
+  </table>
+
+  <!--
+    Instead of the above code, I would have done something more angularish like this
+
+      <table class="sheet">
+        <tr *ngFor="let row of Rows">
+          <td *ngFor="let cell of row.Cells">{{cell.Content}}</td>
+        </tr>
+      </table>
+
+  But this causes "ERROR RangeError: Maximum call stack size exceeded"
+  -->
+</div>
