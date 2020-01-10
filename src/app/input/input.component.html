@@ -10,7 +10,9 @@
     </tr>
     <tr *ngFor="let i of rowIndices">
       <td>{{i}} </td>
-      <td *ngFor="let j of cellIndices"> {{Cell(i,j).Content}} </td>
+      <td *ngFor="let j of cellIndices">
+        <input [(ngModel)]="Cell(i,j).Content" placeholder="cell"/>
+      </td>
     </tr>
   </table>
 
