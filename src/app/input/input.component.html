@@ -11,7 +11,7 @@
     <tr *ngFor="let i of rowIndices">
       <td>{{i}} </td>
       <td *ngFor="let j of cellIndices">
-        <input [(ngModel)]="Cell(i,j).Content" placeholder="cell"/>
+        <input [(ngModel)]="Cell(i,j).Content" placeholder="cell" />
       </td>
     </tr>
   </table>
@@ -27,4 +27,27 @@
 
   But this causes "ERROR RangeError: Maximum call stack size exceeded"
   -->
+
+
+
+
+
+  <h2>XLSX Import and Export</h2>
+  <!-- <input type="file" (change)="onFileChange($event)" multiple="false" /> -->
+  <table class="sjstable">
+    <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let cell of data[0]; let j=index">{{j}}</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let row of data; let i = index">
+      <td>row {{i}}: </td>
+      <td *ngFor="let val of row">
+        {{val}}
+      </td>
+    </tr>
+  </table>
+  <button (click)="export()">Export!</button>
+
 </div>
