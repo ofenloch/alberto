@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cell } from '../excel/cell';
 import { Row } from '../excel/row';
 import { Sheet } from '../excel/sheet';
-import { SheetJS, AOA } from '../excel/sheetjs.component';
+import { SheetJS, AOA } from '../excel/sheetjs';
 
 @Component({
   selector: 'app-input',
