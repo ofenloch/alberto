@@ -7,40 +7,19 @@
  * The angular demo is here: https://github.com/SheetJS/sheetjs/tree/master/demos/angular2/src/app
  *
  */
-import { Component } from '@angular/core';
 
 import * as XLSX from 'xlsx';
 
-type AOA = any[][];
+export type AOA = any[][];
 
-@Component({
-  selector: 'app-sheetjs',
-  template: `
-  <h2>XLSX Import and Export</h2>
-	<input type="file" (change)="onFileChange($event)" multiple="false" />
-	<table class="sjstable">
-    <thead>
-      <tr>
-        <th></th>
-        <th *ngFor="let cell of data[0]; let j=index">{{j}}</th>
-      </tr>
-    </thead>
-		<tr *ngFor="let row of data; let i = index">
-      <td>row {{i}}: </td>
-			<td *ngFor="let val of row">
-				{{val}}
-			</td>
-		</tr>
-	</table>
-	<button (click)="export()">Export!</button>
-	`
-})
 
-export class SheetJSComponent {
-  // TODO: Tansfer data from the sheet
-  data: AOA = [[1, 2, 3], [4, 5, 6]];
+export class SheetJS {
+  data: AOA;
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   fileName = 'SheetJS.xlsx';
+
+  constructor() {
+  }
 
   onFileChange(evt: any) {
     /* wire up file reader */
