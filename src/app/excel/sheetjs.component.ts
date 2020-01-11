@@ -18,8 +18,15 @@ type AOA = any[][];
   template: `
   <h2>XLSX Import and Export</h2>
 	<input type="file" (change)="onFileChange($event)" multiple="false" />
-	<table class="sjs-table">
-		<tr *ngFor="let row of data">
+	<table class="sjstable">
+    <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let cell of data[0]; let j=index">{{j}}</th>
+      </tr>
+    </thead>
+		<tr *ngFor="let row of data; let i = index">
+      <td>row {{i}}: </td>
 			<td *ngFor="let val of row">
 				{{val}}
 			</td>

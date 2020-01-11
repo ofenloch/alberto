@@ -28,3 +28,24 @@ nav a:hover {
 nav a.active {
   color: #039be5;
 }
+
+/* elements with class="sjstable" and all their child elments */
+.sjstable > * {
+  border: 2em solid red;
+  background-color: rgb(178, 217, 235);
+  color: black;
+}
+
+/* <th> elements inside class sjstable */
+/* .sjstable > th {
+  font-weight: bold;
+  border: 1em solid blue;
+  color: navy;
+} */
+/* <td> elements inside class sjstable */
+/* .sjstable > td {
+  border: 1em solid blue;
+} */
+
+
+
