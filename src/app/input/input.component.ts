@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Cell } from '../excel/cell';
+import { MessageService } from '../message.service';
 import { Row } from '../excel/row';
 import { Sheet } from '../excel/sheet';
 import { SheetJS, AOA } from '../excel/sheetjs';
@@ -19,7 +20,8 @@ export class InputComponent implements OnInit {
   private sheetJS: SheetJS;
   data: AOA;
 
-  constructor() {
+  constructor(private logger: MessageService) {
+    this.logger.debug('InputComponent constructor');
   }
 
   get NRows(): number {
@@ -42,6 +44,7 @@ export class InputComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.logger.debug('InputComponent ngOnInit');
     this.sheet = new Sheet(7, 5);
     this.rowIndices = new Array<number>(this.sheet.NRows);
     for (let i = 0; i < this.sheet.NRows; i++) {
@@ -55,6 +58,7 @@ export class InputComponent implements OnInit {
   }
 
   private sheet2AOA(): void {
+    this.logger.debug('InputComponent sheet2AOA');
     this.data = new Array<Array<any>>();
     for (let i = 0; i < this.sheet.NRows; i++) {
       const row = this.Row(i);
@@ -67,6 +71,7 @@ export class InputComponent implements OnInit {
   }
 
   export(): void {
+    this.logger.debug('InputComponent export');
     this.sheetJS.export();
   }
 
