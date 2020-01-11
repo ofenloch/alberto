@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cell } from '../excel/cell';
 import { Row } from '../excel/row';
 import { Sheet } from '../excel/sheet';
+import { SheetJS, AOA } from '../excel/sheetjs.component';
 
 @Component({
   selector: 'app-input',
@@ -15,12 +16,17 @@ export class InputComponent implements OnInit {
   sheet: Sheet;
   rowIndices: Array<number>;
   cellIndices: Array<number>;
+  private sheetJS: SheetJS;
+  data: AOA;
 
   constructor() {
   }
 
   get NRows(): number {
     return this.sheet.NRows;
+  }
+  get NColumns(): number {
+    return this.sheet.NMaxCells;
   }
 
   get Rows(): Array<Row> {
@@ -45,6 +51,23 @@ export class InputComponent implements OnInit {
     for (let j = 0; j < this.sheet.NMaxCells; j++) {
       this.cellIndices[j] = j;
     }
+    this.sheet2AOA();
+  }
+
+  private sheet2AOA(): void {
+    this.data = new Array<Array<any>>();
+    for (let i = 0; i < this.sheet.NRows; i++) {
+      const row = this.Row(i);
+      const rowArray = new Array<any>();
+      for (let j = 0; j < this.sheet.NMaxCells; j++) {
+        rowArray.push(row.Cell(j).Content);
+      }
+      this.data.push(rowArray);
+    }
+  }
+
+  export(): void {
+    this.sheetJS.export();
   }
 
 } // export class InputComponent implements OnInit
