@@ -72,6 +72,7 @@ export class InputComponent implements OnInit {
 
   export(): void {
     this.logger.debug('InputComponent export');
+    this.sheetJS = new SheetJS(this.data);
     this.sheetJS.export();
   }
 

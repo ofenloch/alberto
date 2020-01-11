@@ -18,7 +18,8 @@ export class SheetJS {
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   fileName = 'SheetJS.xlsx';
 
-  constructor() {
+  constructor( data: AOA ) {
+    this.data = data;
   }
 
   onFileChange(evt: any) {
