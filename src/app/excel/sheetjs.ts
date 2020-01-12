@@ -15,12 +15,43 @@ export type AOA = any[][];
 
 export class SheetJS {
   data: AOA;
-  wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
+  writingOpts: XLSX.WritingOptions = {
+    type: 'array', // Output data encoding
+    bookSST: false, // Generate Shared String Table?
+    bookType: 'xlsx', // File format of generated workbook
+    sheet: 'sheet', // Name of Worksheet (for single-sheet formats)
+    compression: false, // Use ZIP compression for ZIP-based formats
+    ignoreEC: true, // Suppress "number stored as text" errors in generated files?
+    Props: null // Override workbook properties on save
+  };
+  htmlOptions: XLSX.Sheet2HTMLOpts = {
+    id: 'sheet', // TABLE element id attribute
+    editable: true, // Add contenteditable to every cell?
+    header: 'Sheet As HTML Table', // HTML Header
+    footer: 'The Sheet\'s Footer' // HTML Footer
+  };
+  csvOpts: XLSX.Sheet2CSVOpts = {
+    FS: ';', // Field Separator ("delimiter")
+    RS: '\n', // Record Separator ("row separator")
+    strip: true, // Remove trailing field separators in each record?
+    blankrows: true, // Include blank lines in the CSV output?
+    skipHidden: false // Skip hidden rows and columns in the CSV output?
+  };
+  jsonOpts: XLSX.Sheet2JSONOpts = {
+    // tslint:disable-next-line: quotemark
+    header: 'A', // Output format
+    range: null, // Override worksheet range
+    blankrows: true, // Include or omit blank lines in the output
+    defval: 'NO VALUE', // Default value for null/undefined values
+    raw: false // if true, return raw data; if false, return formatted text
+  };
+
   fileName = 'SheetJS.xlsx';
 
-  constructor( data: AOA ) {
+  constructor(data: AOA) {
     this.data = data;
   }
+
 
   onFileChange(evt: any) {
     /* wire up file reader */
@@ -55,4 +86,57 @@ export class SheetJS {
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
   }
+
+  open(fileName: string): XLSX.WorkBook {
+    const workbook = XLSX.readFile(fileName);
+    return workbook;
+  }
+
+  workbook2json(workbook: XLSX.WorkBook): string {
+    const result = {};
+    workbook.SheetNames.forEach((sheetName) => {
+      const roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1 });
+      if (roa.length) {
+        result[sheetName] = roa;
+      }
+    });
+    return JSON.stringify(result, null, 2);
+  }
+
+  workbook2csv(workbook: XLSX.WorkBook): string {
+    const result = [];
+    workbook.SheetNames.forEach((sheetName) => {
+      const csv = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName]);
+      if (csv.length) {
+        result.push('SHEET: ' + sheetName);
+        result.push('');
+        result.push(csv);
+      }
+    });
+    return result.join('\n');
+  }
+
+  workbook2fmla(workbook: XLSX.WorkBook): string {
+    const result = [];
+    workbook.SheetNames.forEach((sheetName) => {
+      const formulae = XLSX.utils.sheet_to_formulae(workbook.Sheets[sheetName]);
+      if (formulae.length) {
+        result.push('SHEET: ' + sheetName);
+        result.push('');
+        result.push(formulae.join('\n'));
+      }
+    });
+    return result.join('\n');
+  }
+
+  workbook2html(workbook: XLSX.WorkBook): string {
+    const HTMLOUT = document.getElementById('htmlout');
+    HTMLOUT.innerHTML = '';
+    workbook.SheetNames.forEach((sheetName) => {
+      const htmlstr = XLSX.write(workbook, { sheet: sheetName, type: 'string', bookType: 'html' });
+      HTMLOUT.innerHTML += htmlstr;
+    });
+    return '';
+  }
+
 }
