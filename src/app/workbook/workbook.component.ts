@@ -9,6 +9,10 @@ import * as XLSX from 'xlsx';
 })
 export class WorkbookComponent implements OnInit {
 
+  data: AOA = [[1, 2], [3, 4]];
+  wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
+  fileName = 'SheetJS.xlsx';
+
   fileToUpload: File = null;
   rABS: any = null;
   domrabs: any = null;
@@ -18,10 +22,13 @@ export class WorkbookComponent implements OnInit {
   wbText = '';
   wbHtml = '';
 
-  constructor() { }
-  data: AOA = [[1, 2], [3, 4]];
-  wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
-  fileName = 'SheetJS.xlsx';
+  constructor() {
+
+  }
+
+  ngOnInit() {
+
+  }
 
   onFileChange(evt: any) {
     /* wire up file reader */
@@ -67,31 +74,4 @@ export class WorkbookComponent implements OnInit {
     XLSX.writeFile(wb, fileName);
   } // saveAsXLSX(fileName: string): void
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ngOnInit() {
-    this.rABS = typeof FileReader !== 'undefined' && (FileReader.prototype || {}).readAsBinaryString;
-    this.domrabs = document.getElementsByName('userabs')[0];
-    if (!this.rABS) {
-      this.domrabs.disabled = !(this.domrabs.checked = false);
-    }
-  }
-
-  setFormat(): void {
-
-  }
 }
