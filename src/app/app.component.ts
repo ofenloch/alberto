@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activateTab('Input');
+    this.activateTab('Workbook');
   }
 
   activateTab(tabId: string): void {
