@@ -1,3 +1,38 @@
-<p>
-  workbook works!
-</p>
+<div class="form-group">
+  <label for="fileuploader">Choose A File:</label>
+  <input id="fileuploader" type="file" (change)="onFileChange($event)" multiple="false" />
+  <!-- <table class="sjs-table">
+    <tr *ngFor="let row of data">
+      <td *ngFor="let val of row">
+        {{val}}
+      </td>
+    </tr>
+  </table> -->
+</div>
+
+<div *ngIf="workbook">
+  <label>Output File Name
+    <input [(ngModel)]="fileName" placeholder="name" />
+  </label>
+  <button (click)="saveAs(fileName)">Export!</button>
+</div>
+
+<form *ngIf="workbook">
+  Select Output Format:
+  <select [(ngModel)]="format" (change)="processWorkbook()" id="format" name="format">
+    <option value="CSV" selected>CSV
+    <option value="JSON">JSON
+    <option value="HTML">HTML
+    <option value="FORMULAE">FORMULAE
+  </select>
+</form>
+
+<div *ngIf="wbText!==''">
+  <h3>Output as {{format}}</h3>
+  <pre id="wbText">{{wbText}}</pre>
+</div>
+
+<div *ngIf="wbHtml!==''">
+  <h3>Output as {{format}}</h3>
+  <div id="wbHtml" [innerHTML]="wbHtml"></div>
+</div>
