@@ -3,16 +3,38 @@
   <h1>
     Benvenuto a {{ title }}!
   </h1>
-  <img width="100" alt="Angular Logo"
-    src="assets/alberto-logo.svg">
+  <img width="100" alt="Angular Logo" src="assets/alberto-logo.svg">
+</div>
+
+<!-- Tab links -->
+<div class="tab">
+  <button class="tablinks" (click)="activateTab('Input')">Input</button>
+  <button class="tablinks" (click)="activateTab('Workbook')">Workbook</button>
+  <button class="tablinks" (click)="activateTab('Messages')">Messages</button>
+</div>
+
+<!-- Tab content -->
+<div id="Input" class="tabcontent">
+  <h3>Input</h3>
+  <app-input></app-input>
+</div>
+
+<div id="Workbook" class="tabcontent">
+  <h3>Workbook</h3>
+  <app-workbook></app-workbook>
+</div>
+
+<div id="Messages" class="tabcontent">
+  <h3>Messages</h3>
+  <app-messages></app-messages>
 </div>
 
 
-<app-input></app-input>
 
-<app-workbook></app-workbook>
 
-<app-messages></app-messages>
+
+
+
 
 <!-- <h2>Here are some links to help you start: </h2>
 <ul>
