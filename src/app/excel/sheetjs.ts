@@ -116,7 +116,7 @@ export class SheetJS {
     return result.join('\n');
   }
 
-  workbook2fmla(workbook: XLSX.WorkBook): string {
+  workbook2formulae(workbook: XLSX.WorkBook): string {
     const result = [];
     workbook.SheetNames.forEach((sheetName) => {
       const formulae = XLSX.utils.sheet_to_formulae(workbook.Sheets[sheetName]);
