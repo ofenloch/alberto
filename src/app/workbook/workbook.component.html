@@ -1,6 +1,6 @@
 <div class="form-group">
   <label for="fileuploader">Choose A File:</label>
-  <input id="fileuploader" type="file" (change)="onFileChange($event)" multiple="false" />
+  <input id="fileuploader" type="file" (change)="onFileChange($event)" multiple="false" >
   <!-- <table class="sjs-table">
     <tr *ngFor="let row of data">
       <td *ngFor="let val of row">
@@ -12,7 +12,7 @@
 
 <div *ngIf="workbook">
   <label>Output File Name
-    <input [(ngModel)]="fileName" placeholder="name" />
+    <input [(ngModel)]="fileName" placeholder="name" >
   </label>
   <button (click)="saveAs(fileName)">Export!</button>
 </div>

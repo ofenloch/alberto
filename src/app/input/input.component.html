@@ -11,7 +11,7 @@
     <tr *ngFor="let i of rowIndices">
       <td>{{i}} </td>
       <td *ngFor="let j of cellIndices">
-        <input [(ngModel)]="Cell(i,j).Content" placeholder="cell" />
+        <input [(ngModel)]="Cell(i,j).Content" placeholder="cell" >
       </td>
     </tr>
   </table>
