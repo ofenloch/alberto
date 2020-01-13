@@ -47,6 +47,7 @@ export class WorkbookComponent implements OnInit {
       /* save data */
       this.data = <AOA>(XLSX.utils.sheet_to_json(ws, { header: 1 }));
       this.sheetJS = new SheetJS(this.data);
+      this.processWorkbook();
     }; // reader.onload = (e: any) => {
     reader.readAsBinaryString(target.files[0]);
   } // onFileChange(evt: any)
@@ -59,6 +60,8 @@ export class WorkbookComponent implements OnInit {
       this.wbText = this.sheetJS.workbook2csv(this.workbook);
     } else if (this.format === 'JSON') {
       this.wbText = this.sheetJS.workbook2json(this.workbook);
+    } else if ( this.format === 'FORMULAE') {
+      this.wbText = this.sheetJS.workbook2formulae(this.workbook);
     } else if (this.format === 'HTML') {
       this.wbHtml = this.sheetJS.workbook2html(this.workbook);
     }
@@ -73,5 +76,21 @@ export class WorkbookComponent implements OnInit {
     /* save to file */
     XLSX.writeFile(wb, fileName);
   } // saveAsXLSX(fileName: string): void
+
+  saveAsCSV(fileName: string): void {
+    XLSX.writeFile(this.workbook, fileName + '.csv', { bookType: 'csv'});
+  } // saveAsCSV(fileName: string): void
+
+  saveAsJSON(fileName: string): void {
+
+  } // saveAsJSON(fileName: string): void
+
+  saveAsHTML(fileName: string): void {
+    XLSX.writeFile(this.workbook, fileName + '.html', { bookType: 'html'});
+  } // saveAsHTML(fileName: string): void
+
+  saveAsFORMULAE(fileName: string): void {
+  } // saveAsFORMULAE(fileName: string): void
+
 
 }
