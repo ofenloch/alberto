@@ -14,7 +14,14 @@
   <label>Output File Name
     <input [(ngModel)]="fileName" placeholder="name" >
   </label>
-  <button (click)="saveAs(fileName)">Export!</button>
+</div>
+
+<div *ngIf="workbook">
+  <button (click)="saveAsXLSX(fileName)">Save as XLSX</button>
+  <button (click)="saveAsXLSX(fileName)">Save as CSV</button>
+  <button (click)="saveAsXLSX(fileName)">Save as JSON</button>
+  <button (click)="saveAsFORMULAE(fileName)">Save as FORMULAE</button>
+  <button (click)="saveAsXLSX(fileName)">Save as HTML</button>
 </div>
 
 <form *ngIf="workbook">
